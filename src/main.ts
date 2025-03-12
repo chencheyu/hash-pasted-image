@@ -68,9 +68,11 @@ export default class HashPastedImagePlugin extends Plugin {
 		const cursor = editor.getCursor();
 		const line = editor.getLine(cursor.line);
 		let replacedLine = line.replace(originName, newName);
-    	if(line == replacedLine){
-        	replacedLine = line.replace(encodeURI(originName), newName);
-    	}
+
+		if (line == replacedLine) {
+			replacedLine = line.replace(encodeURI(originName), newName);
+		}
+
 		editor.transaction({
 			changes: [
 				{
