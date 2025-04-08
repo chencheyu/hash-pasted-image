@@ -215,7 +215,6 @@ class SettingTab extends PluginSettingTab {
 				.addDropdown((dropdown) =>
 				dropdown
 					.addOption(EncodeDigest.HEX, 'hex')
-					.addOption(EncodeDigest.BASE64, 'base64')
 					.addOption(EncodeDigest.BASE64URL, 'base64url')
 					.setValue(this.plugin.settings.encodingDigest)
 					.onChange(async (value) => {

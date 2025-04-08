@@ -3,7 +3,7 @@ import { HashAlgorithm, EncodeDigest } from 'settings';
 
 export const hash = (algorithm: string, digest: string, contents: string) => {
 	const digenc: crypto.BinaryToTextEncoding = <crypto.BinaryToTextEncoding>digest;
-	crypto.createHash(algorithm).update(contents).digest(digenc).replaceAll('=', '');
+	return crypto.createHash(algorithm).update(contents).digest(digenc).replaceAll('=', '');
 }
 
 export const path = {
@@ -59,8 +59,6 @@ export const stringToEncodeDigest = (str: string): EncodeDigest => {
 	switch (str) {
 		case 'hex':
 			return EncodeDigest.HEX;
-		case 'base64':
-			return EncodeDigest.BASE64;
 		case 'base64url':
 			return EncodeDigest.BASE64URL;
 		default:

@@ -7,7 +7,6 @@ export enum HashAlgorithm {
 
 export enum EncodeDigest{
 	HEX = 'hex',
-	BASE64 = 'base64',
 	BASE64URL = 'base64url',
 }
 
