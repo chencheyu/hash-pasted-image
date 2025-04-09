@@ -214,8 +214,8 @@ class SettingTab extends PluginSettingTab {
 				.setDesc('Binary-to-text encoding.')
 				.addDropdown((dropdown) =>
 				dropdown
-					.addOption(EncodeDigest.HEX, 'hex')
-					.addOption(EncodeDigest.BASE64URL, 'base64url')
+					.addOption(EncodeDigest.HEX, 'Hex')
+					.addOption(EncodeDigest.BASE64URL, 'Base64 URL')
 					.setValue(this.plugin.settings.encodingDigest)
 					.onChange(async (value) => {
 						this.plugin.settings.encodingDigest = stringToEncodeDigest(value);
