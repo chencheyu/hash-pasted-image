@@ -5,8 +5,14 @@ export enum HashAlgorithm {
 	MD5 = 'md5',
 }
 
+export enum EncodeDigest{
+	HEX = 'hex',
+	BASE64URL = 'base64url',
+}
+
 export interface PluginSettings {
 	hashAlgorithm: HashAlgorithm;
+	encodingDigest: EncodeDigest;
 	copyImageFileSupport: boolean;
 	notification: boolean;
 }
@@ -14,5 +20,6 @@ export interface PluginSettings {
 export const DEFAULT_SETTINGS: PluginSettings = {
 	hashAlgorithm: HashAlgorithm.SHA512,
 	copyImageFileSupport: false,
+	encodingDigest: EncodeDigest.HEX,
 	notification: true,
 };

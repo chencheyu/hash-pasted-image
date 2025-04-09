@@ -8,8 +8,8 @@ import {
 	Notice,
 } from 'obsidian';
 
-import { hash, path, stringToHashAlgorithm } from './utils';
-import { DEFAULT_SETTINGS, HashAlgorithm, PluginSettings } from 'settings';
+import { hash, path, stringToHashAlgorithm, stringToEncodeDigest } from './utils';
+import { DEFAULT_SETTINGS, HashAlgorithm, EncodeDigest, PluginSettings } from 'settings';
 
 const PASTED_IMAGE_PREFIX = 'Pasted image ';
 
@@ -90,7 +90,7 @@ export default class HashPastedImagePlugin extends Plugin {
 
 	generateNewName(file: TFile) {
 		return (
-			hash(this.settings.hashAlgorithm, file.name + new Date().toString()) +
+			hash(this.settings.hashAlgorithm, this.settings.encodingDigest, file.name + new Date().toString()) +
 			'.' +
 			file.extension
 		);
@@ -206,6 +206,19 @@ class SettingTab extends PluginSettingTab {
 					.setValue(this.plugin.settings.notification)
 					.onChange(async (value) => {
 						this.plugin.settings.notification = value;
+						await this.plugin.saveSettings();
+					}),
+			);
+			new Setting(containerEl)
+				.setName('Encoding Digest')
+				.setDesc('Binary-to-text encoding.')
+				.addDropdown((dropdown) =>
+				dropdown
+					.addOption(EncodeDigest.HEX, 'hex')
+					.addOption(EncodeDigest.BASE64URL, 'base64url')
+					.setValue(this.plugin.settings.encodingDigest)
+					.onChange(async (value) => {
+						this.plugin.settings.encodingDigest = stringToEncodeDigest(value);
 						await this.plugin.saveSettings();
 					}),
 			);
