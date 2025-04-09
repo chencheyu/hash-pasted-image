@@ -22,11 +22,16 @@
 | #   | Setting                   | Description                                                  | Default   |
 | --- | ------------------------- | ------------------------------------------------------------ | --------- |
 | 1   | `Hash Algorithm`          | Choose hash algorithm to rename image                        | `SHA-512` |
-| 2   | `Copy Image File Support` | Turn on to rename image files from disk copied to the vault. | `off`     |
-| 3   | `Notification`            | Turn on to show notification when image is renamed.          | `on`      |
+| 2   | `Encoding Digest`         | Binary-to-text encoding                                      | `hex`     |
+| 3   | `Copy Image File Support` | Turn on to rename image files from disk copied to the vault. | `off`     |
+| 4   | `Notification`            | Turn on to show notification when image is renamed.          | `on`      |
 
 ## Contributors
 
 <a href="https://github.com/hardingadonis/hash-pasted-image/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=hardingadonis/hash-pasted-image" />
 </a>
+
+## License
+
+- [hash-pasted-image](https://github.com/hardingadonis/hash-pasted-image) is licensed under the [MIT license](LICENSE)
