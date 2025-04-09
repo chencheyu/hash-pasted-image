@@ -2,9 +2,15 @@ import * as crypto from 'crypto';
 import { HashAlgorithm, EncodeDigest } from 'settings';
 
 export const hash = (algorithm: string, digest: string, contents: string) => {
-	const digenc: crypto.BinaryToTextEncoding = <crypto.BinaryToTextEncoding>digest;
-	return crypto.createHash(algorithm).update(contents).digest(digenc).replaceAll('=', '');
-}
+	const digenc: crypto.BinaryToTextEncoding = <crypto.BinaryToTextEncoding>(
+		digest
+	);
+	return crypto
+		.createHash(algorithm)
+		.update(contents)
+		.digest(digenc)
+		.replaceAll('=', '');
+};
 
 export const path = {
 	join(...partSegments: string[]): string {
