@@ -1,7 +1,7 @@
 name: Auto create PR to format source
 
 on:
-  push:
+  create:
     branches:
       - format/main
 
