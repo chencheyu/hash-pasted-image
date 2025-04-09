@@ -184,6 +184,20 @@ class SettingTab extends PluginSettingTab {
 					}),
 			);
 
+			new Setting(containerEl)
+			.setName('Encoding Digest')
+			.setDesc('Binary-to-text encoding.')
+			.addDropdown((dropdown) =>
+			dropdown
+				.addOption(EncodeDigest.HEX, 'Hex')
+				.addOption(EncodeDigest.BASE64URL, 'Base64 URL')
+				.setValue(this.plugin.settings.encodingDigest)
+				.onChange(async (value) => {
+					this.plugin.settings.encodingDigest = stringToEncodeDigest(value);
+					await this.plugin.saveSettings();
+				}),
+		);
+
 		new Setting(containerEl)
 			.setName('Copy Image File Support')
 			.setDesc(
@@ -198,19 +212,7 @@ class SettingTab extends PluginSettingTab {
 					}),
 			);
 
-			new Setting(containerEl)
-			.setName('Encoding Digest')
-			.setDesc('Binary-to-text encoding.')
-			.addDropdown((dropdown) =>
-			dropdown
-				.addOption(EncodeDigest.HEX, 'Hex')
-				.addOption(EncodeDigest.BASE64URL, 'Base64 URL')
-				.setValue(this.plugin.settings.encodingDigest)
-				.onChange(async (value) => {
-					this.plugin.settings.encodingDigest = stringToEncodeDigest(value);
-					await this.plugin.saveSettings();
-				}),
-		);
+
 
 		new Setting(containerEl)
 			.setName('Notification')
