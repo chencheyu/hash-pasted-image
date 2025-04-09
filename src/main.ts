@@ -8,8 +8,18 @@ import {
 	Notice,
 } from 'obsidian';
 
-import { hash, path, stringToHashAlgorithm, stringToEncodeDigest } from './utils';
-import { DEFAULT_SETTINGS, HashAlgorithm, EncodeDigest, PluginSettings } from 'settings';
+import {
+	hash,
+	path,
+	stringToHashAlgorithm,
+	stringToEncodeDigest,
+} from './utils';
+import {
+	DEFAULT_SETTINGS,
+	HashAlgorithm,
+	EncodeDigest,
+	PluginSettings,
+} from 'settings';
 
 const PASTED_IMAGE_PREFIX = 'Pasted image ';
 
@@ -90,7 +100,11 @@ export default class HashPastedImagePlugin extends Plugin {
 
 	generateNewName(file: TFile) {
 		return (
-			hash(this.settings.hashAlgorithm, this.settings.encodingDigest, file.name + new Date().toString()) +
+			hash(
+				this.settings.hashAlgorithm,
+				this.settings.encodingDigest,
+				file.name + new Date().toString(),
+			) +
 			'.' +
 			file.extension
 		);
@@ -184,19 +198,19 @@ class SettingTab extends PluginSettingTab {
 					}),
 			);
 
-			new Setting(containerEl)
+		new Setting(containerEl)
 			.setName('Encoding Digest')
 			.setDesc('Binary-to-text encoding.')
 			.addDropdown((dropdown) =>
-			dropdown
-				.addOption(EncodeDigest.HEX, 'Hex')
-				.addOption(EncodeDigest.BASE64URL, 'Base64 URL')
-				.setValue(this.plugin.settings.encodingDigest)
-				.onChange(async (value) => {
-					this.plugin.settings.encodingDigest = stringToEncodeDigest(value);
-					await this.plugin.saveSettings();
-				}),
-		);
+				dropdown
+					.addOption(EncodeDigest.HEX, 'Hex')
+					.addOption(EncodeDigest.BASE64URL, 'Base64 URL')
+					.setValue(this.plugin.settings.encodingDigest)
+					.onChange(async (value) => {
+						this.plugin.settings.encodingDigest = stringToEncodeDigest(value);
+						await this.plugin.saveSettings();
+					}),
+			);
 
 		new Setting(containerEl)
 			.setName('Copy Image File Support')
@@ -212,8 +226,6 @@ class SettingTab extends PluginSettingTab {
 					}),
 			);
 
-
-
 		new Setting(containerEl)
 			.setName('Notification')
 			.setDesc('Show a notification when a pasted image is renamed.')
@@ -225,6 +237,5 @@ class SettingTab extends PluginSettingTab {
 						await this.plugin.saveSettings();
 					}),
 			);
-
 	}
 }

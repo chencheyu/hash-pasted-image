@@ -5,7 +5,7 @@ export enum HashAlgorithm {
 	MD5 = 'md5',
 }
 
-export enum EncodeDigest{
+export enum EncodeDigest {
 	HEX = 'hex',
 	BASE64URL = 'base64url',
 }
