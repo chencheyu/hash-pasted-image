@@ -198,6 +198,20 @@ class SettingTab extends PluginSettingTab {
 					}),
 			);
 
+			new Setting(containerEl)
+			.setName('Encoding Digest')
+			.setDesc('Binary-to-text encoding.')
+			.addDropdown((dropdown) =>
+			dropdown
+				.addOption(EncodeDigest.HEX, 'Hex')
+				.addOption(EncodeDigest.BASE64URL, 'Base64 URL')
+				.setValue(this.plugin.settings.encodingDigest)
+				.onChange(async (value) => {
+					this.plugin.settings.encodingDigest = stringToEncodeDigest(value);
+					await this.plugin.saveSettings();
+				}),
+		);
+
 		new Setting(containerEl)
 			.setName('Notification')
 			.setDesc('Show a notification when a pasted image is renamed.')
@@ -209,18 +223,6 @@ class SettingTab extends PluginSettingTab {
 						await this.plugin.saveSettings();
 					}),
 			);
-			new Setting(containerEl)
-				.setName('Encoding Digest')
-				.setDesc('Binary-to-text encoding.')
-				.addDropdown((dropdown) =>
-				dropdown
-					.addOption(EncodeDigest.HEX, 'Hex')
-					.addOption(EncodeDigest.BASE64URL, 'Base64 URL')
-					.setValue(this.plugin.settings.encodingDigest)
-					.onChange(async (value) => {
-						this.plugin.settings.encodingDigest = stringToEncodeDigest(value);
-						await this.plugin.saveSettings();
-					}),
-			);
+
 	}
 }
