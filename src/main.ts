@@ -103,11 +103,11 @@ export default class HashPastedImagePlugin extends Plugin {
 	}
 
 	async generateNewName(file: TFile): Promise<string> {
-		let hashcontext : string | Uint8Array;
-		if( this.settings.hashContext) {
+		let hashcontext: string | Uint8Array;
+		if (this.settings.hashContext) {
 			const imageContent = await file.vault.readBinary(file);
-   			hashcontext = new Uint8Array(imageContent);
-		}else{
+			hashcontext = new Uint8Array(imageContent);
+		} else {
 			hashcontext = file.name + new Date().toString();
 		}
 		return (
@@ -121,10 +121,16 @@ export default class HashPastedImagePlugin extends Plugin {
 		);
 	}
 
-	async fixHashCollision(file: TFile, originName: string, newPath: string): Promise<boolean> {
+	async fixHashCollision(
+		file: TFile,
+		originName: string,
+		newPath: string,
+	): Promise<boolean> {
 		let isRename = true;
 		if (this.settings.hashContext) {
-			const renamedFile = this.app.vault.getAbstractFileByPath(normalizePath(newPath));
+			const renamedFile = this.app.vault.getAbstractFileByPath(
+				normalizePath(newPath),
+			);
 			if (renamedFile instanceof TFile) {
 				const imageContent = await file.vault.readBinary(file);
 				const renamedContext = await renamedFile.vault.readBinary(renamedFile);
@@ -133,7 +139,8 @@ export default class HashPastedImagePlugin extends Plugin {
 					await this.app.fileManager.trashFile(file);
 					if (this.settings.notification) {
 						new Notice(
-							`Pasted image ${originName} already exists hashed file, and has been removed.`);
+							`Pasted image ${originName} already exists hashed file, and has been removed.`,
+						);
 					}
 				}
 			}
@@ -279,6 +286,5 @@ class SettingTab extends PluginSettingTab {
 						await this.plugin.saveSettings();
 					}),
 			);
-		
 	}
 }
