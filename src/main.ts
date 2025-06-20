@@ -62,7 +62,7 @@ export default class HashPastedImagePlugin extends Plugin {
 		}
 
 		const originName = file.name;
-		let newName = await this.generateNewName(file);
+		const newName = await this.generateNewName(file);
 		const newPath = path.join(file.parent.path, newName);
 		const isRename = await this.fixHashCollision(file, originName, newPath);
 
@@ -132,8 +132,7 @@ export default class HashPastedImagePlugin extends Plugin {
 					isRename = false;
 					await this.app.fileManager.trashFile(file);
 					if (this.settings.notification) {
-						new Notice(
-							`Pasted image ${originName} already exists hashed file, and has been removed.`);
+						new Notice(`Pasted image ${originName} already exists hashed file, and has been removed.`);
 					}
 				}
 			}

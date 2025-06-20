@@ -77,8 +77,7 @@ export const ArrayBufferEqual = (buf1 : ArrayBuffer, buf2 : ArrayBuffer) : boole
     if (buf1.byteLength != buf2.byteLength) return false;
     let dv1 = new Uint8Array(buf1);
     let dv2 = new Uint8Array(buf2);
-    for (var i = 0 ; i != buf1.byteLength ; i++)
-    {
+    for (let i = 0 ; i < buf1.byteLength ; i++) {
         if (dv1[i] != dv2[i]) return false;
     }
     return true;
