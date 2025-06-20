@@ -132,7 +132,7 @@ export default class HashPastedImagePlugin extends Plugin {
 					isRename = false;
 					await this.app.fileManager.trashFile(file);
 					if (this.settings.notification) {
-						new Notice(`Pasted image ${originName} already exists hashed file, and has been removed.`);
+						(() => { new Notice(`Pasted image ${originName} already exists hashed file, and has been removed.`); })();
 					}
 				}
 			}
