@@ -103,18 +103,18 @@ export default class HashPastedImagePlugin extends Plugin {
 	}
 
 	async generateNewName(file: TFile): Promise<string> {
-		let hashcontext : string | Uint8Array;
+		let hashContext : string | Uint8Array;
 		if( this.settings.hashContext) {
 			const imageContent = await file.vault.readBinary(file);
-   			hashcontext = new Uint8Array(imageContent);
+   			hashContext = new Uint8Array(imageContent);
 		}else{
-			hashcontext = file.name + new Date().toString();
+			hashContext = file.name + new Date().toString();
 		}
 		return (
 			hash(
 				this.settings.hashAlgorithm,
 				this.settings.encodingDigest,
-				hashcontext,
+				hashContext,
 			) +
 			'.' +
 			file.extension
